@@ -1,21 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./Header.module.css"
 import { SlLocationPin } from "react-icons/sl";
 import flag from "../../assets/flag.png"
 import { FaSearch } from "react-icons/fa";
 import { BiCart } from "react-icons/bi";
 import LowerHeader from "./LowerHeader";
+import { Link } from "react-router-dom";
+import { DataContext } from "../DataProvider/DataProvider";
 const Header = () => {
+ const [{ basket}, dispatch] = useContext(DataContext);
+
+  const totalItem=basket?.reduce((amount,item)=>{
+    return item.amount +amount
+  },0)
   return (
-    <>
+    <div className={classes.fixed}>
       <section className={classes.header__container}>
         <div className={classes.logo__container}>
-          <a href="#">
+          <Link to="/">
             <img
               src="https://pngimg.com/uploads/amazon/small/amazon_PNG11.png"
               alt="amazon logo"
             />
-          </a>
+          </Link>
           <div className={classes.delivery}>
             <span>
               <SlLocationPin />
@@ -35,34 +42,34 @@ const Header = () => {
           <FaSearch size={25} />
         </div>
         <div className={classes.order__container}>
-          <a href="" className={classes.language}>
+          <Link to="" className={classes.language}>
             <img src={flag} alt="flag" />
             <select name="">
               <option value="">EN</option>
             </select>
-          </a>
+          </Link>
 
-          <a href="">
+          <Link to="/auth">
             <div>
               <p>sign In</p>
               <span>Accounts & Lists</span>
             </div>
-          </a>
-          <a href="">
+          </Link>
+          <Link to="/order">
             {" "}
             <div>
               <p>returns</p>
               <span>& Orders</span>
             </div>
-          </a>
-          <a href="" className={classes.cart}>
+          </Link>
+          <Link to="/cart" className={classes.cart}>
             <BiCart size={35} />
-            <span>0</span>
-          </a>
+            <span>{totalItem}</span>
+          </Link>
         </div>
       </section>
       <LowerHeader/>
-    </>
+    </div>
   );
 };
 

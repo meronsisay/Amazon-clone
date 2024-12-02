@@ -1,7 +1,7 @@
 export const data = [
   {
     title: "Electronics",
-    name: "Electronics",
+    name: "electronics",
     img: "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_.jpg",
   },
   {

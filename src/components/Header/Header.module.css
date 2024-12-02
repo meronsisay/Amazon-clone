@@ -11,6 +11,11 @@
   align-items: center;
   height: 70px;
 }
+.fixed{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
 .logo__container {
   display: flex;
   align-items: center; 
