@@ -2,6 +2,7 @@ import { Type } from "./action.type";
 
 export const initialState = {
   basket: [],
+  user: null,
 };
 // export const reducer = (state, action) => {
 //   switch (action.type) {
@@ -46,7 +47,6 @@ export const reducer = (state = { basket: [] }, action) => {
           basket: [...state.basket, { ...action.item, amount: 1 }],
         };
       } else {
-       
         const updatedBasket = state.basket.map((item) =>
           item.id === action.item.id
             ? { ...item, amount: item.amount + 1 }
@@ -70,11 +70,21 @@ export const reducer = (state = { basket: [] }, action) => {
         } else {
           newBasket.splice(index, 1);
         }
-        return{
+        return {
           ...state,
-          basket:newBasket
-        }
+          basket: newBasket,
+        };
       }
+    case Type.SET_USER:
+      return {
+        ...state,
+        user: action.user,
+      };
+    case Type.EMPTY_USER:
+      return {
+        ...state,
+        basket: [],
+      };
     default:
       console.warn(`Unhandled action type: ${action.type}`);
       return state;

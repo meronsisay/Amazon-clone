@@ -1,18 +1,19 @@
 import React, { useContext } from "react";
-import classes from "./Header.module.css"
+import classes from "./Header.module.css";
 import { SlLocationPin } from "react-icons/sl";
-import flag from "../../assets/flag.png"
+import flag from "../../assets/flag.png";
 import { FaSearch } from "react-icons/fa";
 import { BiCart } from "react-icons/bi";
 import LowerHeader from "./LowerHeader";
 import { Link } from "react-router-dom";
 import { DataContext } from "../DataProvider/DataProvider";
+import { auth } from "../../utils/firebase";
 const Header = () => {
- const [{ basket}, dispatch] = useContext(DataContext);
+  const [{ user, basket }, dispatch] = useContext(DataContext);
 
-  const totalItem=basket?.reduce((amount,item)=>{
-    return item.amount +amount
-  },0)
+  const totalItem = basket?.reduce((amount, item) => {
+    return item.amount + amount;
+  }, 0);
   return (
     <div className={classes.fixed}>
       <section className={classes.header__container}>
@@ -39,7 +40,7 @@ const Header = () => {
             <option value="">All</option>
           </select>
           <input type="text" placeholder="search product" />
-          <FaSearch size={25} />
+          <FaSearch size={38} />
         </div>
         <div className={classes.order__container}>
           <Link to="" className={classes.language}>
@@ -49,10 +50,22 @@ const Header = () => {
             </select>
           </Link>
 
-          <Link to="/auth">
+          <Link to={!user && "/auth"}>
             <div>
-              <p>sign In</p>
-              <span>Accounts & Lists</span>
+              <div>
+                {user ? (
+                  <>
+                    <p>Hello, {user?.email?.split("@")[0]}</p>
+                    <span onClick={() => auth.signOut()}>Sign Out</span>
+                  </>
+                ) : (
+                  <>
+                    {" "}
+                    <p> Hello, Sign in</p>
+                    <span>Accounts & Lists</span>
+                  </>
+                )}
+              </div>
             </div>
           </Link>
           <Link to="/order">
@@ -68,7 +81,7 @@ const Header = () => {
           </Link>
         </div>
       </section>
-      <LowerHeader/>
+      <LowerHeader />
     </div>
   );
 };

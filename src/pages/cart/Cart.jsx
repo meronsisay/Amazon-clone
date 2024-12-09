@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import classes from "./cart.module.css";
-import Layout from "../../components/Layout/Layout";
+
 import { DataContext } from "../../components/DataProvider/DataProvider";
 import ProductCard from "../../components/Product/ProductCard";
 import { renderMatches, Link } from "react-router-dom";
@@ -11,21 +11,23 @@ import { IoIosArrowUp } from "react-icons/io";
 
 function Cart() {
   const [{ basket, user }, dispatch] = useContext(DataContext);
-  const total=basket.reduce((amount,item)=> {return item.price* item.amount + amount},0)
+  const total = basket.reduce((amount, item) => {
+    return item.price * item.amount + amount;
+  }, 0);
 
-  const increment=(item)=>{
+  const increment = (item) => {
     dispatch({
-      type:Type.ADD_TO_BASKET,
+      type: Type.ADD_TO_BASKET,
       item,
-    })
-  }
+    });
+  };
 
-const decrement=(id)=>{
-  dispatch({
-    type:Type.REMOVE_FROM_BASKET,
-    id,
-  })
-}
+  const decrement = (id) => {
+    dispatch({
+      type: Type.REMOVE_FROM_BASKET,
+      id,
+    });
+  };
 
   return (
     <section className={classes.container}>
@@ -47,11 +49,11 @@ const decrement=(id)=>{
               />
               <div className={classes.button__container}>
                 <button onClick={() => increment(item)}>
-                  <IoIosArrowUp size={20}/>
+                  <IoIosArrowUp size={20} />
                 </button>
                 <span>{item.amount}</span>
                 <button onClick={() => decrement(item.id)}>
-                  <IoIosArrowDown size={20}/>
+                  <IoIosArrowDown size={20} />
                 </button>
                 {console.log(item.id)}
               </div>

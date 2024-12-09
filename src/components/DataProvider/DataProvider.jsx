@@ -9,4 +9,3 @@ export const DataProvider=({children,reducer,initialState})=>{
     )
 }
 
-// const [state,dispatch]=useReducer(reducer,initialState)
