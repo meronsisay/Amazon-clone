@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5050",
+  baseURL: "https://amazon-backend-deploy-9qkp.onrender.com/",
 });
 
 export { axiosInstance };

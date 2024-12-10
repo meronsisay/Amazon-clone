@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import classes from "./cart.module.css";
-
 import { DataContext } from "../../components/DataProvider/DataProvider";
 import ProductCard from "../../components/Product/ProductCard";
 import { renderMatches, Link } from "react-router-dom";
