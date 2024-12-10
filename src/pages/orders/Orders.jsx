@@ -50,7 +50,7 @@ function Orders() {
         <div>
           {orders?.map((order, i) => {
             return (
-              <div key={`${order.id}-${index}`}>
+              <div key={`${order.id}-${i}`}>
                 <hr />
                 <p>order ID:{order?.id}</p>
                 {order?.data?.basket?.map((ord) => {
